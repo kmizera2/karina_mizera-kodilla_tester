@@ -21,7 +21,7 @@ public class Grades {
     }
 
     public double checkGradesAverage() {
-        for (int i = 0; i < this.grades[this.size - 1]; i++) {
+        for (int i = 0; i < this.size; i++) {
             counter = counter + this.grades[i];
         }
         return (double)  counter/ this.size ;
