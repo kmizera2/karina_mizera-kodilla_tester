@@ -6,7 +6,8 @@ public class Grades {
 
     public Grades() {
         this.grades = new int[10];
-        this.size = 0;    }
+        this.size = 0;
+    }
 
     public void add(int value) {
         if (this.size == 10) {
@@ -17,13 +18,13 @@ public class Grades {
     }
 
     public int checkLastGrade() {
-        return this.grades[this.size-1];
+        return this.grades[this.size - 1];
     }
 
     public double checkGradesAverage() {
         for (int i = 0; i < this.size; i++) {
             counter = counter + this.grades[i];
         }
-        return (double)  counter/ this.size ;
+        return (double) counter / this.size;
     }
 }
