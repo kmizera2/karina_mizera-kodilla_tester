@@ -3,18 +3,22 @@ package com.kodilla.inheritance.homework;
 import com.kodilla.inheritance.Car;
 import com.kodilla.inheritance.Convertible;
 
-public class SysetemManaging {
+public class SystemManaging {
 
     public static void main(String[] args) {
 
-        Car car = new Car(4,8);
-        car.turnOnLights();
-        car.openDoors();
+        OperatingSystem operatingSystem = new OperatingSystem(2023);
+        operatingSystem.turnOn();
+        operatingSystem.turnOff();
 
-        Convertible convertible=new Convertible(4, 5);
-        convertible.turnOnLights();
-        convertible.openDoors();
-        System.out.println(convertible.getSeats());
-        convertible.displayNumberOfSeats();
+        Subsystem1 subsystem1 = new Subsystem1(2024);
+        subsystem1.turnOn();
+        subsystem1.turnOff();
+
+        Subsystem2 subsystem2 = new Subsystem2(2024);
+        subsystem2.turnOn();
+        subsystem2.turnOff();
+
+
     }
 }
