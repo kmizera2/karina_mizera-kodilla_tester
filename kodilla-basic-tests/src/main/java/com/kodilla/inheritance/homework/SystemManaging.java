@@ -1,8 +1,5 @@
 package com.kodilla.inheritance.homework;
 
-import com.kodilla.inheritance.Car;
-import com.kodilla.inheritance.Convertible;
-
 public class SystemManaging {
 
     public static void main(String[] args) {
