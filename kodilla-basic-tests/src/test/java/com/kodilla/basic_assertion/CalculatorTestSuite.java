@@ -1,6 +1,7 @@
 package com.kodilla.basic_assertion;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorTestSuite {
@@ -25,8 +26,8 @@ public class CalculatorTestSuite {
     @Test
     public void testSquareDoubleForZero() {
         Calculator calculator = new Calculator();
-        double a=0;
-        double c=0.001;
+        double a = 0;
+        double c = 0.001;
         double squareDoubleResult = calculator.squareDouble(a);
         assertEquals(0, squareDoubleResult, c);
     }
@@ -34,8 +35,8 @@ public class CalculatorTestSuite {
     @Test
     public void testSquareDoubleForPositiveNumber() {
         Calculator calculator = new Calculator();
-        double a=4;
-        double c=0.001;
+        double a = 4;
+        double c = 0.001;
         double squareDoubleResult = calculator.squareDouble(a);
         assertEquals(16, squareDoubleResult, c);
     }
@@ -43,8 +44,8 @@ public class CalculatorTestSuite {
     @Test
     public void testSquareDoubleForNegativeNumber() {
         Calculator calculator = new Calculator();
-        double a=-3;
-        double c=0.001;
+        double a = -3;
+        double c = 0.001;
         double squareDoubleResult = calculator.squareDouble(a);
         assertEquals(9, squareDoubleResult, c);
     }
