@@ -15,5 +15,4 @@ public class FirstClass {
         notebook.checkWeight();
         notebook.checkYearAndPrice();
     }
-
 }
