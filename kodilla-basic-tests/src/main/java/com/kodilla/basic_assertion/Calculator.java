@@ -13,4 +13,16 @@ public class Calculator {
     public int square(int a) {
         return a * a;
     }
+
+    public double sumDouble(double a, double b) {
+        return a + b;
+    }
+
+    public double subtractDouble(double a, double b) {
+        return a - b;
+    }
+
+    public double squareDouble(double a) {
+        return Math.pow( a, 2.0);
+    }
 }
