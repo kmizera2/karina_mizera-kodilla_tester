@@ -1,4 +1,4 @@
-package com.kodilla.homework;
+package com.kodilla.bank.homework;
 
 import com.kodilla.bank.homework.CashMachine;
 import org.junit.jupiter.api.BeforeEach;
