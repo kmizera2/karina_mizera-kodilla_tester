@@ -14,28 +14,21 @@ public class SchoolDirectory {
         Principal mirska = new Principal("Ewa", "Mirska");
         Principal cichy = new Principal("Marian", "Cichy");
 
+        School kopernik = new School(Arrays.asList(15, 24, 18, 31, 25, 15, 17, 19), "Liceum Ogólnokształcące Im. Kopernika");
+        School technikumBudowlane = new School(Arrays.asList(25, 21, 26, 17, 25, 22, 18, 18, 28, 33), "Technikum Budowlane");
+        School technikumSamochodowe = new School(Arrays.asList(21, 19, 24, 19, 20, 16, 21, 19, 26, 19, 24, 19), "Technikum Samochodowe");
+        School liceumSzymborskiej = new School(Arrays.asList(28, 17, 28, 30, 25, 15, 17, 26), "Liceum Ogólnokształcące Im Szymborskiej");
 
-        School liceumOgólnokształcąceImKopernika = new School(Arrays.asList(15, 24, 18, 31, 25,15,17,19));
-        School technikumBudowlane = new School(Arrays.asList(25, 21, 26, 17, 25, 22, 18, 18, 28, 33));
-        School technikumSamochodowe = new School(Arrays.asList(21, 19, 24, 19, 20, 16, 21, 19, 26, 19, 24, 19));
-        School liceumOgólnokształcąceImSzymborskiej = new School(Arrays.asList(28, 17, 28, 30, 25, 15, 17, 26));
-
-        school.put(kowalski, liceumOgólnokształcąceImKopernika);
+        school.put(kowalski, kopernik);
         school.put(nowak, technikumBudowlane);
         school.put(mirska, technikumSamochodowe);
-        school.put(cichy, liceumOgólnokształcąceImSzymborskiej);
+        school.put(cichy, liceumSzymborskiej);
 
-        for (Map.Entry<Principal, School> principalEntry: school.entrySet()){
+        for (Map.Entry<Principal, School> principalEntry : school.entrySet()) {
             System.out.println("Dyrektor " + principalEntry.getKey().getFirstName() + " "
                     + principalEntry.getKey().getLastName() + ", szkoła: "
-                   //nazwa szkoły
-                    // +school.get(school)
-                   // + school.get(school).
-                    +"liczba uczniów: "
-                    + principalEntry.getValue().getNumberOfStudents());
+                    + principalEntry.getValue().getSchoolName()
+                    + ", liczba uczniów: " + principalEntry.getValue().getNumberOfStudents());
         }
-
-       // System.out.println("szkoła "+school.)
-
     }
 }
