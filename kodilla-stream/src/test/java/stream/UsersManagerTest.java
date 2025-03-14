@@ -43,8 +43,9 @@ class UsersManagerTest {
     @Test
     void testCountUsersWithNoPosts() {
         UsersManager userManager = new UsersManager();
-        int numberOfUsers=userManager.countUsersWithNoPosts();
-        assertEquals(2, numberOfUsers );
+       // int numberOfUsers=userManager.countUsersWithNoPosts();
+        //assertEquals(2, numberOfUsers);
+        assertEquals(2, userManager.countUsersWithNoPosts( ));
     }
 
 }

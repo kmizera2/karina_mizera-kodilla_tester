@@ -14,6 +14,17 @@ public class UsersManager {
     }
 
     static List<String> filterChemistGroupUsernames() {
+
+        return UsersRepository.getUsersList()
+                .stream()
+                .filter(user -> user.getGroup().equals("Chemists"))
+                .map(UsersManager::getUserName)
+                .collect(Collectors.toList());
+    }
+
+    //zmiana zapisu z przekazaniem strumienia od razu do return powyżej
+    /*
+    static List<String> filterChemistGroupUsernames() {
         List<String> usernames = UsersRepository.getUsersList()   // [1]
                 .stream()
                 .filter(user -> user.getGroup().equals("Chemists"))
@@ -22,16 +33,31 @@ public class UsersManager {
 
         return usernames;
     }
+    */
+
+
+    //ta ponizej tez mozna przerobic
 
     static int countUsersWithNoPosts() {
         List<String> usernames = UsersRepository.getUsersList()
                 .stream()
-                .filter(user -> user.getNumberOfPost()==0)
+                .filter(user -> user.getNumberOfPost() == 0)
                 .map(UsersManager::getUserName)
                 .collect(Collectors.toList());
 
         return usernames.size();
     }
+
+    /*
+    static int countUsersWithNoPosts() {
+
+        return UsersRepository.getUsersList()
+                .stream()
+                .filter(user -> user.getNumberOfPost() == 0)
+                .map(UsersManager::getUserName)
+                .toList().size();
+    }
+     */
 
 
 
@@ -54,7 +80,7 @@ public class UsersManager {
     static List<User> getUsersOlderThan(int age) {
         return UsersRepository.getUsersList()
                 .stream()
-                .filter(user -> user.getAge()>age)
+                .filter(user -> user.getAge() > age)
                 .collect(Collectors.toList());
 
 
