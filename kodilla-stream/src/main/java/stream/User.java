@@ -1,3 +1,5 @@
+package stream;
+
 import java.util.Objects;
 
 public class User {

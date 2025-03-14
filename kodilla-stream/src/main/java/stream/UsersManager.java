@@ -1,3 +1,5 @@
+package stream;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,12 +43,12 @@ public class UsersManager {
                 .forEach(username -> System.out.println(username));
     }
 
-        private static void processUsersStream2() {
-            UsersRepository.getUsersList()
-                    .stream()
-                    .filter(user -> user.getGroup().equals("Chemists")) // [1]
-                    .map(UsersManager::getUserName)
-                    .forEach(username -> System.out.println(username));
+    private static void processUsersStream2() {
+        UsersRepository.getUsersList()
+                .stream()
+                .filter(user -> user.getGroup().equals("Chemists")) // [1]
+                .map(UsersManager::getUserName)
+                .forEach(username -> System.out.println(username));
     }
 
     static List<User> getUsersOlderThan(int age) {
@@ -62,3 +64,4 @@ public class UsersManager {
         return user.getUsername();
     }
 }
+
