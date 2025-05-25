@@ -17,11 +17,6 @@ public class FizzBuzzSteps {
         this.input = number;
     }
 
-    @Given("1")
-    public void dividend_is_1() {
-        this.input = 1;
-    }
-
     @When("I ask for the FizzBuzz result")
     public void i_ask_for_the_result() {
         this.result = checkIfFizzBuzz(this.input);
