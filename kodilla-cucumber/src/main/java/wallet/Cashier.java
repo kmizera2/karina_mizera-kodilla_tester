@@ -8,6 +8,7 @@ public class Cashier {
         this.cashSlot = cashSlot;
     }
 
+
     public String withdraw(Wallet wallet, int amount) {
         if (amount <= 0) {
             cashSlot.dispense(0);

@@ -5,7 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import wallet.Cashier;
 import wallet.Wallet;
@@ -27,6 +26,11 @@ public class WalletSteps {
     @When("I request ${int}")
     public void i_request_amount(int amount) {
         message = cashier.withdraw(wallet, amount);
+    }
+
+    @Then("the balance of my wallet should be ${int}")
+    public void the_balance_of_my_wallet_should_be(int expectedBalance) {
+        assertEquals(expectedBalance, wallet.getBalance());
     }
 
     @Then("${int} should be dispensed")
