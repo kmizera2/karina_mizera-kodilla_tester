@@ -1,4 +1,6 @@
-package com.kodilla.notification;
+package com.kodilla.mockito;
 
 public interface Client {
+
+    void receive(Notification notification);
 }

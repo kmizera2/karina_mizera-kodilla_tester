@@ -1,4 +1,4 @@
-package com.kodilla.notification;
+package com.kodilla.mockito;
 
 public interface Notification {
 }

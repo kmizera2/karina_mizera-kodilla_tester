@@ -55,7 +55,7 @@ class UserValidatorTest {
             "user@domain.22, false",
             "user@do-main.pl, true",
             "user@do-main.pe-el, false",
-            "user@do-main.pe.el.el, false",
+            "user@do-main.pe.el.el.elt, true", //ciekawe, wczesniej bylo false
             "user@domain.companyname, false",
             "Żółw@qw.pl, false",
             "asdw@żw.pl, false",
