@@ -112,67 +112,85 @@ class DbManagerTestSuite {
         return count;
     }
 
-
-    @Test
+@Test
     void testSelectUsersAndPosts() throws SQLException {
         Statement statement = createStatement();
 
-        // Znajdź maksymalne ID użytkownika w tabeli USERS
+        System.out.println("Użytkownicy z co najmniej 2 postami PRZED dodaniem nowych danych:");
+        printUsersWithAtLeastTwoPosts(statement);
+
+        int beforeCount = getUsersWithAtLeastTwoPostsCount(statement);
+
         ResultSet rsMax = statement.executeQuery("SELECT COALESCE(MAX(ID), 0) AS MAX_ID FROM USERS");
         rsMax.next();
-        int maxUserId = rsMax.getInt("MAX_ID");
+        int baseId = rsMax.getInt("MAX_ID") + 1;
         rsMax.close();
 
-        int baseId = maxUserId + 1;
-
-        // Wstaw nowych użytkowników z ID od baseId wzwyż
         insertUsersWithBaseId(statement, baseId);
         insertPostsWithBaseId(statement, baseId);
 
-        // Zapytanie odfiltrowujące tylko użytkowników z ID od baseId wzwyż
-        String sqlQuery = String.format("""
-        SELECT U.FIRSTNAME, U.LASTNAME, COUNT(*) AS POST_COUNT
-        FROM USERS U
-        JOIN POSTS P ON U.ID = P.USER_ID
-        WHERE U.ID >= %d
-        GROUP BY U.ID
-        HAVING COUNT(*) >= 2
-    """, baseId);
+        System.out.println("\nUżytkownicy z co najmniej 2 postami PO dodaniu nowych danych:");
+        printUsersWithAtLeastTwoPosts(statement);
 
-        ResultSet rs = statement.executeQuery(sqlQuery);
+        int afterCount = getUsersWithAtLeastTwoPostsCount(statement);
 
-        int counter = getPostResultsCount(rs);
-        Assertions.assertEquals(2, counter);
+        int expectedIncrease = 2; // Wiemy, że 2 z nowych użytkowników ma >= 2 posty
 
-        rs.close();
+        Assertions.assertEquals(beforeCount + expectedIncrease, afterCount);
+
         statement.close();
     }
 
-    private void insertUsersWithBaseId(Statement statement, int baseId) throws SQLException {
-        statement.executeUpdate(String.format("INSERT INTO USERS(ID, FIRSTNAME, LASTNAME) VALUES (%d, 'Test1', 'User1')", baseId));
-        statement.executeUpdate(String.format("INSERT INTO USERS(ID, FIRSTNAME, LASTNAME) VALUES (%d, 'Test2', 'User2')", baseId + 1));
-        statement.executeUpdate(String.format("INSERT INTO USERS(ID, FIRSTNAME, LASTNAME) VALUES (%d, 'Test3', 'User3')", baseId + 2));
+    private int getUsersWithAtLeastTwoPostsCount(Statement statement) throws SQLException {
+        String countQuery = """
+        SELECT COUNT(*) AS USER_COUNT
+        FROM (
+            SELECT U.ID
+            FROM USERS U
+            JOIN POSTS P ON U.ID = P.USER_ID
+            GROUP BY U.ID
+            HAVING COUNT(*) >= 2
+        ) AS subquery
+    """;
+        ResultSet rs = statement.executeQuery(countQuery);
+        rs.next();
+        int count = rs.getInt("USER_COUNT");
+        rs.close();
+        return count;
     }
 
-    private void insertPostsWithBaseId(Statement statement, int baseId) throws SQLException {
-        statement.executeUpdate(String.format("INSERT INTO POSTS(USER_ID, BODY) VALUES (%d, 'Post A1')", baseId));
-        statement.executeUpdate(String.format("INSERT INTO POSTS(USER_ID, BODY) VALUES (%d, 'Post A2')", baseId));
-        statement.executeUpdate(String.format("INSERT INTO POSTS(USER_ID, BODY) VALUES (%d, 'Post B1')", baseId + 1));
-        statement.executeUpdate(String.format("INSERT INTO POSTS(USER_ID, BODY) VALUES (%d, 'Post B2')", baseId + 1));
-        statement.executeUpdate(String.format("INSERT INTO POSTS(USER_ID, BODY) VALUES (%d, 'Post B3')", baseId + 1));
-        statement.executeUpdate(String.format("INSERT INTO POSTS(USER_ID, BODY) VALUES (%d, 'Post C1')", baseId + 2));
-    }
+    private void printUsersWithAtLeastTwoPosts(Statement statement) throws SQLException {
+        String query = """
+        SELECT U.FIRSTNAME, U.LASTNAME, COUNT(*) AS POST_COUNT
+        FROM USERS U
+        JOIN POSTS P ON U.ID = P.USER_ID
+        GROUP BY U.ID, U.FIRSTNAME, U.LASTNAME
+        HAVING COUNT(*) >= 2
+        ORDER BY U.ID
+    """;
 
-    private static int getPostResultsCount(ResultSet rs) throws SQLException {
-        int counter = 0;
+        ResultSet rs = statement.executeQuery(query);
         while (rs.next()) {
-            System.out.printf("%s %s - Posts: %d%n",
+            System.out.printf("%s %s - Liczba postów: %d%n",
                     rs.getString("FIRSTNAME"),
                     rs.getString("LASTNAME"),
                     rs.getInt("POST_COUNT"));
-            counter++;
         }
-        return counter;
+        rs.close();
     }
 
+    private void insertUsersWithBaseId(Statement statement, int baseId) throws SQLException {
+        statement.executeUpdate(String.format("INSERT INTO USERS(ID, FIRSTNAME, LASTNAME) VALUES (%d, 'Test4', 'User4')", baseId));
+        statement.executeUpdate(String.format("INSERT INTO USERS(ID, FIRSTNAME, LASTNAME) VALUES (%d, 'Test5', 'User5')", baseId + 1));
+        statement.executeUpdate(String.format("INSERT INTO USERS(ID, FIRSTNAME, LASTNAME) VALUES (%d, 'Test6', 'User6')", baseId + 2));
+    }
+
+    private void insertPostsWithBaseId(Statement statement, int baseId) throws SQLException {
+        statement.executeUpdate(String.format("INSERT INTO POSTS(USER_ID, BODY) VALUES (%d, 'Post d1')", baseId));
+        statement.executeUpdate(String.format("INSERT INTO POSTS(USER_ID, BODY) VALUES (%d, 'Post d2')", baseId));
+        statement.executeUpdate(String.format("INSERT INTO POSTS(USER_ID, BODY) VALUES (%d, 'Post e1')", baseId + 1));
+        statement.executeUpdate(String.format("INSERT INTO POSTS(USER_ID, BODY) VALUES (%d, 'Post e2')", baseId + 1));
+        statement.executeUpdate(String.format("INSERT INTO POSTS(USER_ID, BODY) VALUES (%d, 'Post e3')", baseId + 1));
+        statement.executeUpdate(String.format("INSERT INTO POSTS(USER_ID, BODY) VALUES (%d, 'Post f1')", baseId + 2));
+    }
 }
