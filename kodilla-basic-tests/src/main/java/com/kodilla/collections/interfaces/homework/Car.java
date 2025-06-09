@@ -1,4 +1,4 @@
-package com.kodilla.inheritance;
+package com.kodilla.collections.interfaces.homework;
 
 public class Car {
     private int wheels;

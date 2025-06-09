@@ -1,4 +1,7 @@
-package com.kodilla.inheritance;
+package com.kodilla.inheritance.homework;
+
+import com.kodilla.collections.interfaces.homework.Car;
+import com.kodilla.inheritance.Convertible;
 
 public class Application {
     public static void main(String[] args) {
