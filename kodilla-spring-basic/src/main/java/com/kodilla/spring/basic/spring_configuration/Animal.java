@@ -1,4 +1,5 @@
 package com.kodilla.spring.basic.spring_configuration;
 
-public class Animal {
+public interface Animal {
+    String getVoice();
 }
